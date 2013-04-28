@@ -273,9 +273,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ElFinder.Net\ElFinder.Net.csproj">
-      <Project>{4635b781-a1a1-40a3-b57d-26cf552695bb}</Project>
-      <Name>ElFinder.Net</Name>
+    <ProjectReference Include="..\elFinder.Net\elFinder.Net.csproj">
+      <Project>{ee8da138-7eda-4eb5-b3fd-377763d5eaae}</Project>
+      <Name>elFinder.Net</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
