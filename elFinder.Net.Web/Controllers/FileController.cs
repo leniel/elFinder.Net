@@ -14,12 +14,12 @@ namespace elFinder.Net.Web.Controllers
                     new DirectoryInfo(Server.MapPath("~/Files/" + folder)),
                     "http://" + Request.Url.Authority + "/Files/" + folder)
             {
-                IsReadOnly = false,
-                Alias = "Files",
-                MaxUploadSizeInKb = 500 // <= 500 KB
+                IsReadOnly = false, // Can be readonly according to user's membership permission
+                Alias = "Files", // Beautiful name given to the root/home folder
+                MaxUploadSizeInKb = 500 // Limit imposed to user uploaded file <= 500 KB
             };
 
-            // Is a subfolder selected?
+            // Was a subfolder selected in Home Index page?
             if (!string.IsNullOrEmpty(subFolder))
             {
                 root.StartPath = new DirectoryInfo(Server.MapPath("~/Files/" + folder + "/" + subFolder));
