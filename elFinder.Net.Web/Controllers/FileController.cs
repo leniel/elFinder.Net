@@ -14,6 +14,11 @@ namespace elFinder.Net.Web.Controllers
                     new DirectoryInfo(Server.MapPath("~/Files/" + folder)),
                     "http://" + Request.Url.Authority + "/Files/" + folder)
             {
+                // Sample using ASP.NET built in Membership functionality...
+                // Only the super user can READ (download files) & WRITE (create folders/files/upload files).
+                // Other users can only READ (download files)
+                // IsReadOnly = !User.IsInRole(AccountController.SuperUser)
+
                 IsReadOnly = false, // Can be readonly according to user's membership permission
                 Alias = "Files", // Beautiful name given to the root/home folder
                 MaxUploadSizeInKb = 500 // Limit imposed to user uploaded file <= 500 KB
