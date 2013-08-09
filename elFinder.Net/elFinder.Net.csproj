@@ -72,7 +72,7 @@
     <Compile Include="Response\TreeResponse.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="mimeTypes.txt" />
+    <EmbeddedResource Include="mimeTypes.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
