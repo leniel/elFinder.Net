@@ -1,16 +1,15 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ElFinder.Sample")]
+[assembly: AssemblyTitle("elFinder.Net.Web.Web")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("ElFinder.Sample")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
+[assembly: AssemblyCompany("Leniel Macaferi Consulting")]
+[assembly: AssemblyProduct("elFinder.Net.Web")]
+[assembly: AssemblyCopyright("Copyright ©  2013 Leniel Macaferi Consulting")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ac5f8388-1923-4c0e-9b37-0309712a5fc0")]
+[assembly: Guid("6768af75-f607-41b8-bcb4-44721b8d34bf")]
 
 // Version information for an assembly consists of the following four values:
 //
