@@ -1,6 +1,7 @@
 ﻿using ElFinder;
 using System.IO;
 using System.Web.Mvc;
+using System.Collections.Generic;
 
 namespace elFinder.Net.Web.Controllers
 {
@@ -21,7 +22,8 @@ namespace elFinder.Net.Web.Controllers
 
                 IsReadOnly = false, // Can be readonly according to user's membership permission
                 Alias = "Files", // Beautiful name given to the root/home folder
-                MaxUploadSizeInKb = 500 // Limit imposed to user uploaded file <= 500 KB
+                MaxUploadSizeInKb = 500, // Limit imposed to user uploaded file <= 500 KB
+                LockedFolders = new List<string>( new string[] { "Folder1"})
             };
 
             // Was a subfolder selected in Home Index page?

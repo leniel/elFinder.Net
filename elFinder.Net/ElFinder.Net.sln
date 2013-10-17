@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElFinder.Net", "ElFinder.Net\ElFinder.Net.csproj", "{4635B781-A1A1-40A3-B57D-26CF552695BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElFinder.Sample", "ElFinder.Sample\ElFinder.Sample.csproj", "{F14BB5C5-4F35-40CE-AD61-F099A08102CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4635B781-A1A1-40A3-B57D-26CF552695BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4635B781-A1A1-40A3-B57D-26CF552695BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4635B781-A1A1-40A3-B57D-26CF552695BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4635B781-A1A1-40A3-B57D-26CF552695BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F14BB5C5-4F35-40CE-AD61-F099A08102CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F14BB5C5-4F35-40CE-AD61-F099A08102CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F14BB5C5-4F35-40CE-AD61-F099A08102CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F14BB5C5-4F35-40CE-AD61-F099A08102CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
