@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Web;
 using System.Web.Mvc;
+using System.Web;
 
 namespace ElFinder
 {
@@ -20,6 +20,11 @@ namespace ElFinder
         JsonResult Put(string target, string content);        
         JsonResult Paste(string  source, string dest, IEnumerable<string> targets, bool isCut);
         JsonResult Upload(string target, HttpFileCollectionBase targets);
+        JsonResult Thumbs(IEnumerable<string> targets);
+        JsonResult Dim(string target);
+        JsonResult Resize(string target, int width, int height);
+        JsonResult Crop(string target, int x, int y, int width, int height);
+        JsonResult Rotate(string target, int degree);
         ActionResult File(string target, bool download);
         FullPath ParsePath(string target);
     }

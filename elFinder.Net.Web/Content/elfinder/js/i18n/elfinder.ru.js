@@ -77,17 +77,6 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 			'errNetMountNoDriver'  : 'Неподдерживаемый протокол.',     // added 17.04.2012
 			'errNetMountFailed'    : 'Ошибка монтирования.',           // added 17.04.2012
 			'errNetMountHostReq'   : 'Host required.', // added 18.04.2012
-			'errSessionExpires'    : 'Сессия была завершена так как превышено время отсутствия активности',
-			'errCreatingTempDir'   : 'Ошибка при создании временной директории: "$1"',
-			'errFtpDownloadFile'   : 'Ошибка при скачивании файла с FTP: "$1"',
-			'errFtpUploadFile'     : 'Ошибка при загрузке файла на FTP: "$1"',
-			'errFtpMkdir'          : 'Ошибка при создании директории на FTP: "$1"',
-			'errArchiveExec'       : 'Ошибка при выполнении архивации: "$1"',
-			'errExtractExec'       : 'Ошибка при выполнении распаковки: "$1"',
-
-			'errUploadFile'        : 'Невозможно загрузить файл "$1"',
-
-
 			/******************************* commands names ********************************/
 			'cmdarchive'   : 'Создать архив',
 			'cmdback'      : 'Назад',
@@ -143,7 +132,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 			'ntfarchive'  : 'Создание архива',
 			'ntfextract'  : 'Распаковка архива',
 			'ntfsearch'   : 'Поиск файлов',
-			'ntfsmth'     : 'Занят важным делом',
+			'ntfsmth'     : 'Занят важным делом desu >_<',
 			'ntfnetmount' : 'Монтирую сетевой диск', // added 18.04.2012
 
 			/************************************ dates **********************************/
@@ -190,6 +179,10 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 			'Sat'         : 'Сбт',
 
 			/******************************** sort variants ********************************/
+			'sortnameDirsFirst' : 'по имени (папки в начале)', 
+			'sortkindDirsFirst' : 'по типу (папки в начале)', 
+			'sortsizeDirsFirst' : 'по размеру (папки в начале)', 
+			'sortdateDirsFirst' : 'по дате (папки в начале)', 
 			'sortname'          : 'по имени', 
 			'sortkind'          : 'по типу', 
 			'sortsize'          : 'по размеру',

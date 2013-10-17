@@ -1,9 +1,9 @@
-﻿using ElFinder.DTO;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.IO;
 using System.Web;
 using System.Web.Mvc;
+using ElFinder.DTO;
+using System.IO;
 
 namespace ElFinder
 {
@@ -21,6 +21,7 @@ namespace ElFinder
         {
             _driver = driver;             
         }
+
         /// <summary>
         /// Process elFinder request
         /// </summary>
@@ -93,16 +94,9 @@ namespace ElFinder
                     }
                 case "rm":
                     {
-                        IEnumerable<string> targets = request.Form.GetValues("targets");
+                        IEnumerable<string> targets = GetTargetsArray(request);
                         if (targets == null)
-                        {
-                            var t = parameters["targets[]"];
-                            if (string.IsNullOrEmpty(t))
-                                t = parameters["targets"];
-                            if (string.IsNullOrEmpty(t))
-                                return Error.MissedParameter("targets");
-                            targets = t.Split(',');
-                        }
+                            Error.MissedParameter("targets");
                         return _driver.Remove(targets);
                     }
                 case "ls":
@@ -123,16 +117,9 @@ namespace ElFinder
                     return _driver.Put(target, content);
                 case "paste":
                     {
-                        IEnumerable<string> targets = request.Form.GetValues("targets");
+                        IEnumerable<string> targets = GetTargetsArray(request);
                         if (targets == null)
-                        {
-                            var t = parameters["targets[]"];
-                            if (string.IsNullOrEmpty(t))
-                                t = parameters["targets"];
-                            if (string.IsNullOrEmpty(t))
-                                return Error.MissedParameter("targets");
-                            targets = t.Split(',');
-                        }
+                            Error.MissedParameter("targets");
                         string src = parameters["src"];
                         if (string.IsNullOrEmpty(src))
                             return Error.MissedParameter("src");
@@ -149,27 +136,93 @@ namespace ElFinder
                     return _driver.Upload(target, request.Files);
                 case "duplicate":
                     {
-                        IEnumerable<string> targets = request.Form.GetValues("targets");
-                        if (targets == null)
-                        {
-                            var t = parameters["targets[]"];
-                            if (string.IsNullOrEmpty(t))
-                                t = parameters["targets"];
-                            if (string.IsNullOrEmpty(t))
-                                return Error.MissedParameter("targets");
-                            targets = t.Split(',');
-                        }
+                        IEnumerable<string> targets = GetTargetsArray(request);
+                        if(targets == null)
+                            Error.MissedParameter("targets");
                         return _driver.Duplicate(targets);
+                    }
+                case "tmb":
+                    {
+                        IEnumerable<string> targets = GetTargetsArray(request);
+                        if (targets == null)
+                            Error.MissedParameter("targets");
+                        return _driver.Thumbs(targets);
+                    }
+                case "dim":
+                    {
+                        if (string.IsNullOrEmpty(target))
+                            return Error.MissedParameter(cmdName);
+                        return _driver.Dim(target);
+                    }
+                case "resize":
+                    {
+                        if (string.IsNullOrEmpty(target))
+                            return Error.MissedParameter(cmdName);                        
+                        switch (parameters["mode"])
+                        {
+                            case "resize":
+                                return _driver.Resize(target, int.Parse(parameters["width"]), int.Parse(parameters["height"]));
+                            case "crop":
+                                return _driver.Crop(target, int.Parse(parameters["x"]), int.Parse(parameters["y"]), int.Parse(parameters["width"]), int.Parse(parameters["height"]));
+                            case "rotate":
+                                return _driver.Rotate(target, int.Parse(parameters["degree"]));
+                            default:
+                                break;
+                        }
+                        return Error.CommandNotFound();
                     }
                 default:
                     return Error.CommandNotFound();
             }
         }
 
+        /// <summary>
+        /// Get actual filesystem path by hash
+        /// </summary>
+        /// <param name="hash">Hash of file or directory</param>
         public FileSystemInfo GetFileByHash(string hash)
         {
             FullPath path = _driver.ParsePath(hash);
-            return path.Directory == null ? (FileSystemInfo)path.File : (FileSystemInfo)path.Directory;
+            return !path.IsDirectoty ? (FileSystemInfo)path.File : (FileSystemInfo)path.Directory;
+        }
+
+        public ActionResult GetThumbnail(HttpRequestBase request, HttpResponseBase response, string hash)
+        {
+            string thumbHash = hash;
+            if (thumbHash != null)
+            {
+                FullPath path = _driver.ParsePath(thumbHash);
+                if (!path.IsDirectoty && path.Root.CanCreateThumbnail(path.File))
+                {
+                    if (!HttpCacheHelper.IsFileFromCache(path.File, request, response))
+                    {
+                        ImageWithMime thumb = path.Root.GenerateThumbnail(path);
+                        return new FileStreamResult(thumb.ImageStream, thumb.Mime);                        
+                    }
+                    else
+                    {
+                        response.ContentType = Helper.GetMimeType(path.Root.PicturesEditor.ConvertThumbnailExtension(path.File.Extension));
+                        response.End();
+                    }
+                }
+            }
+            return new EmptyResult();
+        }
+
+        private IEnumerable<string> GetTargetsArray(HttpRequestBase request)
+        {
+            IEnumerable<string> targets = request.Form.GetValues("targets");
+            NameValueCollection parameters = request.QueryString.Count > 0 ? request.QueryString : request.Form;
+            if (targets == null)
+            {
+                string t = parameters["targets[]"];
+                if (string.IsNullOrEmpty(t))
+                    t = parameters["targets"];
+                if (string.IsNullOrEmpty(t))
+                    return null;
+                targets = t.Split(',');
+            }
+            return targets;
         }
     }
 }

@@ -18,9 +18,12 @@ namespace ElFinder.DTO
         }
         public static JsonResult MaxUploadFileSize()
         {
-            return FormatSimpleError("errUploadFileSize");
+            return FormatSimpleError("errFileMaxSize");
         }
-
+        public static JsonResult AccessDenied()
+        {
+            return FormatSimpleError("errAccess");
+        }
         private static JsonResult FormatSimpleError(string message)
         {
             return Json(new { error = message });

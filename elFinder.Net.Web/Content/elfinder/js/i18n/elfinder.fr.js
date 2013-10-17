@@ -78,14 +78,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 			'errNetMountNoDriver'  : 'Protocol non supporté.',     // added 17.04.2012
 			'errNetMountFailed'    : 'Echec du montage.',         // added 17.04.2012
 			'errNetMountHostReq'   : 'Hôte requis.', // added 18.04.2012			
-			'errSessionExpires'    : 'Votre session a expiré en raison de son inactivité',
-			'errCreatingTempDir'   : 'Impossible de créer le répertoire temporaire : "$1"',
-			'errFtpDownloadFile'   : 'Impossible de télécharger le file depuis l\'accès FTP : "$1"',
-			'errFtpUploadFile'     : 'Impossible d\'envoyer le fichier vers l\'accès FTP : "$1"',
-			'errFtpMkdir'          : 'Impossible de créer un répertoire distant sur l\'accès FTP :"$1"',
-			'errArchiveExec'       : 'Erreur lors de l\'archivage des fichiers : "$1"',
-			'errExtractExec'       : 'Erreur lors de l\'extraction des fichiers : "$1"',
-			'errUploadFile'        : 'Envoi impossible de "$1"',
+			
 			
 			/******************************* commands names ********************************/
 			'cmdarchive'   : 'Créer une archive',
@@ -143,7 +136,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 			'ntfarchive'  : 'Création de l\'archive',
 			'ntfextract'  : 'Extraction des fichiers de l\'archive',
 			'ntfsearch'   : 'Recherche des fichiers',
-			'ntfsmth'     : 'Fait quelque chose',
+			'ntfsmth'     : 'Fait quelque chose >_<',
 			'ntfloadimg'  : 'Chargement de l\' image',
 			'ntfnetmount' : 'Monte le volume réseau', // added 18.04.2012			
 			
@@ -328,3 +321,5 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 		}
 	}
 }
+
+ 

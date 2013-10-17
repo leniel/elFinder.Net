@@ -65,22 +65,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 			'errArcType'           : 'Archivtyp nicht untersützt.',
 			'errNoArchive'         : 'Bei der Datei handelt es nicht um ein Archiv oder der Archivtyp nicht unterstütz.',
 			'errCmdNoSupport'      : 'Das Backend unterstütz diesen Befehl nicht.',
-			'errSessionExpires'    : 'Ihre Sitzung ist aufgrund von Inaktivität abgelaufen',
-			'errCreatingTempDir'   : 'Erstellung des temporären Verzeichnisses nicht möglich: "$1"',
-			'errFtpDownloadFile'   : 'Download der Datei über FTP nicht möglich: "$1"',
-			'errFtpUploadFile'     : 'Upload der Datei zu FTP nicht möglich: "$1"',
-			'errFtpMkdir'          : 'Erstellung des Remote-Verzeichnisses auf FTP nicht möglich: "$1"',
-			'errArchiveExec'       : 'Fehler bei der Archivierung der Dateien: "$1"',
-			'errExtractExec'       : 'Fehler beim Extrahieren der Dateien: "$1"',
-			'cmdsort'              : 'Sortieren',
-			'sortkind'             : 'nach Typ',
-			'sortname'             : 'nach Name',
-			'sortsize'             : 'nach Größe',
-			'sortdate'             : 'nach Datum',
-			'sortFoldersFirst'     : 'Ordner zuerst',
-			'errUploadFile'        : 'Upload von "$1" nicht möglich.',
-
-
+			
 			/******************************* commands names ********************************/
 			'cmdarchive'   : 'Archiv erstellen',
 			'cmdback'      : 'Zurück',
@@ -133,7 +118,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 			'ntfarchive'  : 'Erstelle Archiv',
 			'ntfextract'  : 'Entpacke Dateien',
 			'ntfsearch'   : 'Suche',
-			'ntfsmth'     : 'Bin beschäftigt',
+			'ntfsmth'     : 'Bin beschäftigt >_<',
 			
 			/************************************ dates **********************************/
 			'dateUnknown' : 'unbekannt',

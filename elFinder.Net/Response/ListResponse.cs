@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
+using ElFinder.DTO;
 
 namespace ElFinder.Response
 {

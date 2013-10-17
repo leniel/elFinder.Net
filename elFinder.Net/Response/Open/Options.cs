@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
+using System.Collections.Generic;
 
 namespace ElFinder.Response
 {
@@ -24,7 +24,7 @@ namespace ElFinder.Response
         public byte IsCopyOverwrite { get { return 1; } }        
 
         [DataMember(Name = "separator")]
-        public string Separator { get { return "/"; } }
+        public char Separator { get { return '/'; } }
 
         [DataMember(Name = "path")]
         public string Path { get; set; }
@@ -43,11 +43,12 @@ namespace ElFinder.Response
 
         public Options(FullPath fullPath)
         {
-           
-            Path = fullPath.RelativePath;
-            Url = fullPath.Root.Url;
-            ThumbnailsUrl = fullPath.Root.TmbUrl;
+
+            Path = fullPath.Root.Alias;
+            if (fullPath.RelativePath != string.Empty)
+                Path += Separator + fullPath.RelativePath.Replace('\\', Separator);
+            Url = fullPath.Root.Url ?? string.Empty;
+            ThumbnailsUrl = fullPath.Root.ThumbnailsUrl ?? string.Empty;
         }
-        public Options() { }
     }
 }
