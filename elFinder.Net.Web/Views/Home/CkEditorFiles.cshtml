@@ -1,0 +1,17 @@
+﻿@model FileViewModel
+
+@{
+    ViewBag.Title = "CKEditor Files";
+}
+<div>
+    <textarea id="content"></textarea>
+</div>
+<script src="//cdn.ckeditor.com/4.4.6/full/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('content', {
+        filebrowserBrowseUrl: '@Url.Action("FileBrowser","Home")?caller=ckeditor&type=files',
+        filebrowserImageBrowseUrl: '@Url.Action("FileBrowser","Home")?caller=ckeditor&type=images',
+        filebrowserFlashBrowseUrl: '@Url.Action("FileBrowser","Home")?caller=ckeditor&type=flash',
+        uiColor: '#9AB8F3'
+    });
+</script>

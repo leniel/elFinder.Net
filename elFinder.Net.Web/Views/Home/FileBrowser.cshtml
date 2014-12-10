@@ -1,0 +1,98 @@
+﻿@model FileViewModel
+@{
+    ViewBag.Title = "TinyMCE Files";
+    Layout = "../Shared/_PopupLayout.cshtml";
+}
+@Styles.Render("~/Content/elfinder")
+@Scripts.Render("~/Scripts/elfinder")
+
+<script type="text/javascript">
+    var FileBrowserDialogue = {
+        win: window.parent,
+        caller: '@ViewBag.Caller',
+        langCode: '@ViewBag.LangCode',
+        type: '@ViewBag.Type',
+        callbackfn: '@ViewBag.Callbackfn',
+        CKEditorFuncNum: '@ViewBag.CKEditorFuncNum',        
+        init: function () {
+        },
+        mySubmit: function (file) {                        
+            switch (this.caller) {
+                case 'ckeditor':
+                case 'opener':
+                    this.win = window.opener;
+                    break;
+                case 'parent':
+                    this.win = window.parent;
+                    break;
+                case 'top':
+                    this.win = window.top;
+                    break;
+                case 'tinymce4':
+                    var params = window.parent.tinyMCE.activeEditor.windowManager.getParams();
+                    var theField = window.parent.document.getElementById(params.field);
+                    if (theField) {
+                        theField.value = file.url;
+                        window.parent.tinyMCE.activeEditor.windowManager.close();
+                        return true;
+                    }
+                    break;
+                default:
+            }
+            if (this.win) {
+                if (this.win.CKEDITOR) {
+                    this.win.CKEDITOR.tools.callFunction(this.CKEditorFuncNum, file.url);
+                } else {
+                    this.win[fn](file.url);
+                }
+            }
+            else
+                alert(file.url);
+
+            if (window.opener)
+                window.close();
+            return false;
+        }
+    }
+    $(function () {
+        var myCommands = elFinder.prototype._options.commands;
+
+        var disabled = ['extract', 'archive', 'resize', 'help', 'select']; // Not yet implemented commands in ElFinder.Net
+
+        $.each(disabled, function (i, cmd) {
+            (idx = $.inArray(cmd, myCommands)) !== -1 && myCommands.splice(idx, 1);
+        });
+
+        var selectedFile = null;
+
+        var options = {
+            url: '/connector', // connector route defined in \App_Start\RouteConfig.cs
+            customData: { folder: '@Model.Folder', subFolder: '@Model.SubFolder' }, // customData passed in every request to the connector as query strings. These values are used in FileController's Index method.
+            rememberLastDir: false, // Prevent elFinder saving in the Browser LocalStorage the last visited directory
+            commands: myCommands,
+            //lang: 'pt_BR', // elFinder supports UI and messages localization. Check the folder Content\elfinder\js\i18n for all available languages. Be sure to include the corresponding .js file(s) in the JavaScript bundle.
+            uiOptions: { // UI buttons available to the user
+                toolbar: [
+                    ['back', 'forward'],
+                    ['reload'],
+                    ['home', 'up'],
+                    ['mkdir', 'mkfile', 'upload'],
+                    ['open', 'download'],
+                    ['info'],
+                    ['quicklook'],
+                    ['copy', 'cut', 'paste'],
+                    ['rm'],
+                    ['duplicate', 'rename', 'edit'],
+                    ['view', 'sort']
+                ]
+            },
+            getFileCallback: function (file) { // editor callback
+                // file.url - commandsOptions.getfile.onlyURL = false (default)
+                // file     - commandsOptions.getfile.onlyURL = true
+                FileBrowserDialogue.mySubmit(file); // pass selected file path to TinyMCE
+            }            
+        };
+        $('#elfinder').elfinder(options).elfinder('instance');        
+    });
+</script>
+<div id="elfinder"></div>
