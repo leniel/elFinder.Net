@@ -43,7 +43,7 @@
                 if (this.win.CKEDITOR) {
                     this.win.CKEDITOR.tools.callFunction(this.CKEditorFuncNum, file.url);
                 } else {
-                    this.win[fn](file.url);
+                    this.win[this.callbackfn](file.url);
                 }
             }
             else

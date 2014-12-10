@@ -246,6 +246,7 @@
     <Content Include="Views\Home\FileBrowser.cshtml" />
     <Content Include="Views\Shared\_PopupLayout.cshtml" />
     <Content Include="Views\Home\CkEditorFiles.cshtml" />
+    <Content Include="Views\Home\StandAloneFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

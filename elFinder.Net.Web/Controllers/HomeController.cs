@@ -38,6 +38,12 @@ namespace elFinder.Net.Web.Controllers
             return View(model);
         }
 
+        public ActionResult StandAloneFile(string subFolder)
+        {
+            var model = new FileViewModel { Folder = "MyFolder", SubFolder = subFolder };
+            return View(model);
+        }
+
         #region File dialog
         public ActionResult FileBrowser(string subFolder, string caller, string langCode, string type, string fn, string CKEditorFuncNum)
         {            
