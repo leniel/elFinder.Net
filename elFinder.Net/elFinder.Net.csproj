@@ -83,11 +83,13 @@
     <Compile Include="DTO\FileDTO.cs" />
     <Compile Include="DTO\ImageDTO.cs" />
     <Compile Include="DTO\RootDTO.cs" />
+    <Compile Include="Facade\StringExtension.cs" />
     <Compile Include="Facade\Connector.cs" />
     <Compile Include="Facade\FileSystemDriver.cs" />
     <Compile Include="Facade\FullPath.cs" />
     <Compile Include="Facade\IDriver.cs" />
     <Compile Include="Facade\Root.cs" />
+    <Compile Include="Facade\Utf8ToAsciiConverter.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="HttpCacheHelper.cs" />
     <Compile Include="PicturesEditor\IPicturesEditor.cs" />
