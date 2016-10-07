@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -369,7 +370,7 @@ namespace ElFinder
             }
             return Json(response);
         }
-        JsonResult IDriver.Upload(string target, System.Web.HttpFileCollectionBase targets)
+        JsonResult IDriver.Upload(string target, HttpFileCollectionBase targets)
         {
             FullPath dest = ParsePath(target);
             var response = new AddResponse();
@@ -386,9 +387,13 @@ namespace ElFinder
             }
             for (int i = 0; i < targets.AllKeys.Length; i++)
             {
-                HttpPostedFileBase file = targets[i];                
-                FileInfo path = new FileInfo(Path.Combine(dest.Directory.FullName, Path.GetFileName(file.FileName)));
+                HttpPostedFileBase file = targets[i];
+                var path =
+                    new FileInfo(Path.Combine(dest.Directory.FullName,
+                        Path.GetFileNameWithoutExtension(file.FileName).Transliterate() +
+                        Path.GetExtension(file.FileName)));
 
+                string savedfilePath = string.Empty;
                 if (path.Exists)
                 {
                     if (dest.Root.UploadOverwrite)
@@ -409,6 +414,8 @@ namespace ElFinder
                             {
                                 File.Delete(path.FullName);
                                 File.Move(tmpPath, path.FullName);
+
+                                savedfilePath = path.FullName;
                             }
                             else
                             {
@@ -418,14 +425,43 @@ namespace ElFinder
                     }
                     else
                     {
-                        file.SaveAs(Path.Combine(path.DirectoryName, Helper.GetDuplicatedName(path)));
+                        savedfilePath = Path.Combine(path.DirectoryName, Helper.GetDuplicatedName(path));
+                        file.SaveAs(savedfilePath);
                     }
                 }
                 else
                 {
-                    file.SaveAs(path.FullName);
-                }                
-                response.Added.Add((FileDTO)DTOBase.Create(new FileInfo(path.FullName), dest.Root));
+                    savedfilePath = path.FullName;
+                    file.SaveAs(savedfilePath);
+                }
+
+                //check dimenssion
+                FileStream fs = null;
+
+                try
+                {
+                    fs = new FileStream(savedfilePath, FileMode.Open, FileAccess.Read);
+                    using (var image = Image.FromStream(fs))
+                    {
+                        if (image.Width != 0)//check it's real image 
+                        {
+                            response.Added.Add((FileDTO)DTOBase.Create(new FileInfo(path.FullName), dest.Root));
+                        }
+                        else
+                        {
+                            return Error.CannotUploadFile();
+                        }
+                    }
+                }
+                catch
+                {
+                    return Error.CannotUploadFile();
+                }
+                finally
+                {
+                    if (fs != null) fs.Close();
+                }
+
             }
             return Json(response);
         }

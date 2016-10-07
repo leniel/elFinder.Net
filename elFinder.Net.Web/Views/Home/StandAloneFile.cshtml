@@ -1,0 +1,80 @@
+﻿@model FileViewModel
+
+@{
+    ViewBag.Title = "CKEditor Files";
+}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Popup file browser</h2>
+            <form class="form-inline" role="form">                
+                <div class="form-group">                    
+                    <input type="text" class="form-control" id="inputfile1">
+                </div>
+                <button type="button" class="btn btn-default" id="btnfile1">Select file</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h2>Modal file browser</h2>
+            <form class="form-inline" role="form">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="inputfile2">
+                </div>
+                <button type="button" class="btn btn-default" id="btnfile2">Select file</button>
+            </form>
+        </div>
+    </div>    
+</div>
+<div class="modal fade" id="FileBrowserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="H1">File browser</h4>
+            </div>
+            <div class="modal-body">
+                <iframe frameborder="0" style="width: 100%;height: 500px;" src=""></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //CallBack function
+    function newWinFn(fileurl) {
+        $('#inputfile1').val(fileurl);
+    }
+
+    function fileBrowserCallBack(fileurl) {
+        $('#inputfile2').val(fileurl);
+        $('#FileBrowserModal').modal('hide');
+    }
+
+    $(function () {
+        // Button click event
+        $('#btnfile1').on('click', function (e) {
+            e.preventDefault();
+            var top = window.screenTop + 50;
+            var left = window.screenLeft + 50;
+            window.open('@Url.Action("FileBrowser","Home")?caller=opener&fn=newWinFn&langCode=en', 'fileBrowser', 'top=' + top + ',left=' + left + ',menubar=0,scrollbars=0,toolbar=0,height=550,width=700');
+        });
+        $('#btnfile2').on('click', function (e) {
+            e.preventDefault();
+            $('#FileBrowserModal').modal('show');
+        });
+
+        $('#FileBrowserModal').on('shown.bs.modal', function () {
+            $(this).find(".modal-body iframe").attr("src", "@Url.Action("FileBrowser","Home")?caller=parent&fn=fileBrowserCallBack&langCode=en");
+        });
+    });    
+</script>

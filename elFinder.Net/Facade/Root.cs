@@ -254,9 +254,23 @@ namespace ElFinder
             {
                 if (!input.Exists)
                     throw new ArgumentException("File not exist");
-                using (Image image = Image.FromFile(input.FullName))
+                FileStream fs = null;
+
+                try
                 {
-                    return new Size(image.Width, image.Height);
+                    fs = new FileStream(input.FullName, FileMode.Open, FileAccess.Read);
+                    using (var image = Image.FromStream(fs))
+                    {
+                        return new Size(image.Width, image.Height);
+                    }
+                }
+                catch
+                {
+                    return new Size(150, 150);
+                }
+                finally
+                {
+                    if (fs != null) fs.Close();
                 }
             }
 

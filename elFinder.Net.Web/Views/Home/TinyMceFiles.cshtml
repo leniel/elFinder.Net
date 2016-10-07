@@ -1,0 +1,37 @@
+﻿@model FileViewModel
+
+@{
+    ViewBag.Title = "TinyMCE Files";
+}
+<div>
+    <textarea id="content"></textarea>
+</div>
+<script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: "textarea#content",
+        theme: "modern",
+        height: 300,
+        plugins: [
+                "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                "save table contextmenu directionality emoticons template paste textcolor"
+        ],
+        content_css: "/Content/metro-bootstrap.min.css",
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
+        file_browser_callback: function (field, url, type, win) {
+            tinyMCE.activeEditor.windowManager.open({
+                url: '@Url.Action("FileBrowser","Home")?caller=tinymce4&langCode=en&type=' + type,
+                title: 'File Browser',
+                width: 700,
+                height: 500,
+                inline: true,
+                close_previous: false
+            }, {
+                window: win,
+                field: field
+            });
+            return false;
+        }
+    });
+</script>
