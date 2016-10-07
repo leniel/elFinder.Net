@@ -96,7 +96,7 @@ namespace ElFinder
                     {
                         IEnumerable<string> targets = GetTargetsArray(request);
                         if (targets == null)
-                            Error.MissedParameter("targets");
+                            return Error.MissedParameter("targets");
                         return _driver.Remove(targets);
                     }
                 case "ls":
