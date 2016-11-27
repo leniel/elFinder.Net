@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace ElFinder.DTO
 {
@@ -9,36 +9,36 @@ namespace ElFinder.DTO
     internal abstract class DTOBase
     {
         protected static readonly DateTime _unixOrigin = new DateTime(1970, 1, 1, 0, 0, 0);
-        
+
         /// <summary>
         ///  Name of file/dir. Required
         /// </summary>
         [DataMember(Name = "name")]
         public string Name { get; protected set; }
-        
+
         /// <summary>
         ///  Hash of current file/dir path, first symbol must be letter, symbols before _underline_ - volume id, Required.
         /// </summary>
         [DataMember(Name = "hash")]
-        public string Hash { get; protected set; } 
-       
+        public string Hash { get; protected set; }
+
         /// <summary>
         ///  mime type. Required.
         /// </summary>
         [DataMember(Name = "mime")]
-        public string Mime { get; protected set; } 
- 
+        public string Mime { get; protected set; }
+
         /// <summary>
         /// file modification time in unix timestamp. Required.
         /// </summary>
         [DataMember(Name = "ts")]
-        public long UnixTimeStamp { get; protected set; } 
+        public long UnixTimeStamp { get; protected set; }
 
         /// <summary>
         ///  file size in bytes
         /// </summary>
         [DataMember(Name = "size")]
-        public long Size { get; protected set; } 
+        public long Size { get; protected set; }
 
         /// <summary>
         ///  is readable
@@ -116,11 +116,11 @@ namespace ElFinder.DTO
                     Hash = root.VolumeId + Helper.EncodePath(directory.Name),
                     Read = 1,
                     Write = root.IsReadOnly ? (byte)0 : (byte)1,
-                    Locked = root.IsLocked ? (byte)1 : (byte)0,                    
-                    Name = root.Alias,                    
+                    Locked = root.IsLocked ? (byte)1 : (byte)0,
+                    Name = root.Alias,
                     Size = 0,
                     UnixTimeStamp = (long)(directory.LastWriteTimeUtc - _unixOrigin).TotalSeconds,
-                    VolumeId = root.VolumeId                    
+                    VolumeId = root.VolumeId
                 };
                 return response;
             }
@@ -134,15 +134,14 @@ namespace ElFinder.DTO
                     Hash = root.VolumeId + Helper.EncodePath(directory.FullName.Substring(root.Directory.FullName.Length)),
                     Read = 1,
                     Write = root.IsReadOnly ? (byte)0 : (byte)1,
-                    Locked = (root.LockedFolders.Any(f => f == directory.Name) || root.IsLocked) ? (byte)1 : (byte)0,                    
+                    Locked = (root.LockedFolders.Any(f => f == directory.Name) || root.IsLocked) ? (byte)1 : (byte)0,
                     Size = 0,
                     Name = directory.Name,
-                    UnixTimeStamp = (long)(directory.LastWriteTimeUtc - _unixOrigin).TotalSeconds,                    
+                    UnixTimeStamp = (long)(directory.LastWriteTimeUtc - _unixOrigin).TotalSeconds,
                     ParentHash = root.VolumeId + Helper.EncodePath(parentPath.Length > 0 ? parentPath : directory.Parent.Name)
                 };
                 return response;
             }
         }
-       
     }
 }

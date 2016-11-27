@@ -7,12 +7,12 @@ namespace ElFinder.Response
     [DataContract]
     internal class TreeResponse
     {
-        [DataMember(Name="tree")]
+        [DataMember(Name = "tree")]
         public List<DTOBase> Tree { get; private set; }
 
         public TreeResponse()
         {
             Tree = new List<DTOBase>();
-        }     
+        }
     }
 }

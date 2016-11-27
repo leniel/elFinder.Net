@@ -7,7 +7,7 @@ namespace ElFinder.Response
     [DataContract]
     internal class OpenResponseBase
     {
-        [DataMember(Name="files")]
+        [DataMember(Name = "files")]
         public List<DTOBase> Files { get { return _files; } }
 
         [DataMember(Name = "cwd")]

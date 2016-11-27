@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 
 namespace ElFinder
 {
@@ -10,6 +6,7 @@ namespace ElFinder
     {
         public string Mime { get; private set; }
         public Stream ImageStream { get; private set; }
+
         public ImageWithMime(string mime, Stream stream)
         {
             Mime = mime;

@@ -1,5 +1,5 @@
-﻿using System.Runtime.Serialization;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace ElFinder.Response
 {
@@ -7,12 +7,14 @@ namespace ElFinder.Response
     internal class Archive
     {
         private static string[] _empty = new string[0];
+
         [DataMember(Name = "create")]
         public IEnumerable<string> Create { get { return _empty; } }
 
         [DataMember(Name = "extract")]
         public IEnumerable<string> Extract { get { return _empty; } }
     }
+
     [DataContract]
     internal class Options
     {
@@ -21,7 +23,7 @@ namespace ElFinder.Response
         private static Archive _emptyArchives = new Archive();
 
         [DataMember(Name = "copyOverwrite")]
-        public byte IsCopyOverwrite { get { return 1; } }        
+        public byte IsCopyOverwrite { get { return 1; } }
 
         [DataMember(Name = "separator")]
         public char Separator { get { return '/'; } }
@@ -43,7 +45,6 @@ namespace ElFinder.Response
 
         public Options(FullPath fullPath)
         {
-
             Path = fullPath.Root.Alias;
             if (fullPath.RelativePath != string.Empty)
                 Path += Separator + fullPath.RelativePath.Replace('\\', Separator);

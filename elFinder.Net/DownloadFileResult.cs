@@ -8,6 +8,7 @@ namespace ElFinder
     {
         public FileInfo File { get; private set; }
         public bool IsDownload { get; private set; }
+
         public DownloadFileResult(FileInfo file, bool isDownload)
         {
             File = file;
@@ -20,7 +21,6 @@ namespace ElFinder
             HttpRequestBase request = context.HttpContext.Request;
             if (!HttpCacheHelper.IsFileFromCache(File, request, response))
             {
-
                 string fileName;
                 string fileNameEncoded = HttpUtility.UrlEncode(File.Name);
 

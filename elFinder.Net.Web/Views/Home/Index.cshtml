@@ -9,6 +9,6 @@ Available 1st level Folders - clicking will navigate you to the File Manager set
 <ul>
     @foreach (string folder in Model)
     {
-        <li><a href="@Url.Action(MVC.Home.ActionNames.Files, MVC.Home.Name, new { subFolder = folder })">@folder</a> </li>
+        <li><a href="@Url.Action("Files", "Home", new { subFolder = folder })">@folder</a> </li>
     }
 </ul>

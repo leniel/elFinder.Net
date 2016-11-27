@@ -1,5 +1,4 @@
-﻿
-namespace elFinder.Net.Web.ViewModels
+﻿namespace elFinder.Net.Web.ViewModels
 {
     public class FileViewModel
     {

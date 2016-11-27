@@ -22,7 +22,9 @@ namespace ElFinder
             _backgroundColor = backgroundColor;
         }
 
-        public DefaultPicturesEditor() : this(Color.Transparent) { }
+        public DefaultPicturesEditor() : this(Color.Transparent)
+        {
+        }
 
         public ImageWithMime GenerateThumbnail(Stream input, int size, bool aspectRatio)
         {
@@ -141,12 +143,11 @@ namespace ElFinder
             double theta = ((double)angle) * Math.PI / 180.0;
             double locked_theta = theta;
 
-            
             while (locked_theta < 0.0)
                 locked_theta += 2 * Math.PI;
 
             double newWidth, newHeight;
-            int nWidth, nHeight; 
+            int nWidth, nHeight;
 
             double adjacentTop, oppositeTop;
             double adjacentBottom, oppositeBottom;
@@ -183,36 +184,35 @@ namespace ElFinder
                     Point[] points;
                     if (locked_theta >= 0.0 && locked_theta < pi2)
                     {
-                        points = new Point[] { 
-											 new Point( (int) oppositeBottom, 0 ), 
-											 new Point( nWidth, (int) oppositeTop ),
-											 new Point( 0, (int) adjacentBottom )
-										 };
-
+                        points = new Point[] {
+                                             new Point( (int) oppositeBottom, 0 ),
+                                             new Point( nWidth, (int) oppositeTop ),
+                                             new Point( 0, (int) adjacentBottom )
+                                         };
                     }
                     else if (locked_theta >= pi2 && locked_theta < Math.PI)
                     {
-                        points = new Point[] { 
-											 new Point( nWidth, (int) oppositeTop ),
-											 new Point( (int) adjacentTop, nHeight ),
-											 new Point( (int) oppositeBottom, 0 )						 
-										 };
+                        points = new Point[] {
+                                             new Point( nWidth, (int) oppositeTop ),
+                                             new Point( (int) adjacentTop, nHeight ),
+                                             new Point( (int) oppositeBottom, 0 )
+                                         };
                     }
                     else if (locked_theta >= Math.PI && locked_theta < (Math.PI + pi2))
                     {
-                        points = new Point[] { 
-											 new Point( (int) adjacentTop, nHeight ), 
-											 new Point( 0, (int) adjacentBottom ),
-											 new Point( nWidth, (int) oppositeTop )
-										 };
+                        points = new Point[] {
+                                             new Point( (int) adjacentTop, nHeight ),
+                                             new Point( 0, (int) adjacentBottom ),
+                                             new Point( nWidth, (int) oppositeTop )
+                                         };
                     }
                     else
                     {
-                        points = new Point[] { 
-											 new Point( 0, (int) adjacentBottom ), 
-											 new Point( (int) oppositeBottom, 0 ),
-											 new Point( (int) adjacentTop, nHeight )		
-										 };
+                        points = new Point[] {
+                                             new Point( 0, (int) adjacentBottom ),
+                                             new Point( (int) oppositeBottom, 0 ),
+                                             new Point( (int) adjacentTop, nHeight )
+                                         };
                     }
                     g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
 
@@ -245,6 +245,6 @@ namespace ElFinder
             return new ImageWithMime(mime, output);
         }
 
-        private Color _backgroundColor;       
+        private Color _backgroundColor;
     }
 }
