@@ -20,10 +20,12 @@ namespace ElFinder
         {
             return Mime.GetMimeType(ext);
         }
+
         public static string EncodePath(string path)
         {
             return HttpServerUtility.UrlTokenEncode(System.Text.UTF8Encoding.UTF8.GetBytes(path));
         }
+
         public static string DecodePath(string path)
         {
             return System.Text.UTF8Encoding.UTF8.GetString(HttpServerUtility.UrlTokenDecode(path));
@@ -49,10 +51,10 @@ namespace ElFinder
             var name = Path.GetFileNameWithoutExtension(file.Name);
             var ext = file.Extension;
 
-            var newName = string.Format(@"{0}\{1} copy{2}", parentPath, name, ext);            
+            var newName = string.Format(@"{0}\{1} copy{2}", parentPath, name, ext);
             if (!File.Exists(newName))
             {
-                return newName;               
+                return newName;
             }
             else
             {

@@ -1,7 +1,6 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 using ElFinder.DTO;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ElFinder.Response
 {
@@ -9,7 +8,8 @@ namespace ElFinder.Response
     internal class InitResponse : OpenResponseBase
     {
         private static string[] _empty = new string[0];
-        [DataMember(Name="api")]
+
+        [DataMember(Name = "api")]
         public string Api { get { return "2.0"; } }
 
         [DataMember(Name = "uplMaxSize")]

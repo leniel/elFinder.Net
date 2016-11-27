@@ -1,14 +1,14 @@
-﻿using AttributeRouting.Web.Mvc;
-using elFinder.Net.Web.ViewModels;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using elFinder.Net.Web.ViewModels;
 
 namespace elFinder.Net.Web.Controllers
 {
+    [RouteArea("")]
     public partial class HomeController : Controller
     {
-        [GET("")]
+        [Route("")]
         public virtual ActionResult Index()
         {
             DirectoryInfo di = new DirectoryInfo(Server.MapPath("~/Files/MyFolder"));
@@ -18,7 +18,7 @@ namespace elFinder.Net.Web.Controllers
             return View(folders);
         }
 
-        [GET("FileManager/{subFolder?}")]
+        [Route("file-manager/{subFolder?}")]
         public virtual ActionResult Files(string subFolder)
         {        // FileViewModel contains the root MyFolder and the selected subfolder if any
             FileViewModel model = new FileViewModel() { Folder = "MyFolder", SubFolder = subFolder };

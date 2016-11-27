@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace System.Web.Mvc
 {
@@ -12,6 +8,7 @@ namespace System.Web.Mvc
         {
             Data = data;
         }
+
         public override void ExecuteResult(ControllerContext context)
         {
             if (context == null)

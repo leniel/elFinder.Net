@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using ElFinder.DTO;
-using System.IO;
 
 namespace ElFinder
 {
@@ -13,13 +13,14 @@ namespace ElFinder
     public class Connector
     {
         private IDriver _driver;
+
         /// <summary>
         /// Initialize new instance of ElFinder.Connector
         /// </summary>
         /// <param name="driver">Driver to process request</param>
         public Connector(IDriver driver)
         {
-            _driver = driver;             
+            _driver = driver;
         }
 
         /// <summary>
@@ -54,14 +55,17 @@ namespace ElFinder
                     if (string.IsNullOrEmpty(target))
                         return Error.MissedParameter(cmdName);
                     return _driver.File(target, !string.IsNullOrEmpty(parameters["download"]) && parameters["download"] == "1");
+
                 case "tree":
                     if (string.IsNullOrEmpty(target))
                         return Error.MissedParameter(cmdName);
                     return _driver.Tree(target);
+
                 case "parents":
                     if (string.IsNullOrEmpty(target))
                         return Error.MissedParameter(cmdName);
                     return _driver.Parents(target);
+
                 case "mkdir":
                     {
                         if (string.IsNullOrEmpty(target))
@@ -103,10 +107,12 @@ namespace ElFinder
                     if (string.IsNullOrEmpty(target))
                         return Error.MissedParameter(cmdName);
                     return _driver.List(target);
+
                 case "get":
                     if (string.IsNullOrEmpty(target))
                         return Error.MissedParameter(cmdName);
                     return _driver.Get(target);
+
                 case "put":
                     if (string.IsNullOrEmpty(target))
                         return Error.MissedParameter(cmdName);
@@ -115,6 +121,7 @@ namespace ElFinder
                     if (string.IsNullOrEmpty(target))
                         return Error.MissedParameter("content");
                     return _driver.Put(target, content);
+
                 case "paste":
                     {
                         IEnumerable<string> targets = GetTargetsArray(request);
@@ -134,10 +141,11 @@ namespace ElFinder
                     if (string.IsNullOrEmpty(target))
                         return Error.MissedParameter(cmdName);
                     return _driver.Upload(target, request.Files);
+
                 case "duplicate":
                     {
                         IEnumerable<string> targets = GetTargetsArray(request);
-                        if(targets == null)
+                        if (targets == null)
                             Error.MissedParameter("targets");
                         return _driver.Duplicate(targets);
                     }
@@ -157,15 +165,18 @@ namespace ElFinder
                 case "resize":
                     {
                         if (string.IsNullOrEmpty(target))
-                            return Error.MissedParameter(cmdName);                        
+                            return Error.MissedParameter(cmdName);
                         switch (parameters["mode"])
                         {
                             case "resize":
                                 return _driver.Resize(target, int.Parse(parameters["width"]), int.Parse(parameters["height"]));
+
                             case "crop":
                                 return _driver.Crop(target, int.Parse(parameters["x"]), int.Parse(parameters["y"]), int.Parse(parameters["width"]), int.Parse(parameters["height"]));
+
                             case "rotate":
                                 return _driver.Rotate(target, int.Parse(parameters["degree"]));
+
                             default:
                                 break;
                         }
@@ -197,7 +208,7 @@ namespace ElFinder
                     if (!HttpCacheHelper.IsFileFromCache(path.File, request, response))
                     {
                         ImageWithMime thumb = path.Root.GenerateThumbnail(path);
-                        return new FileStreamResult(thumb.ImageStream, thumb.Mime);                        
+                        return new FileStreamResult(thumb.ImageStream, thumb.Mime);
                     }
                     else
                     {

@@ -7,7 +7,7 @@ namespace ElFinder.Response
     [DataContract]
     internal class ChangedResponse
     {
-        [DataMember(Name="changed")]
+        [DataMember(Name = "changed")]
         public List<FileDTO> Changed { get; private set; }
 
         public ChangedResponse()

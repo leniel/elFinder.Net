@@ -23,7 +23,7 @@
         var selectedFile = null;
 
         var options = {
-            url: '/connector', // connector route defined in \App_Start\RouteConfig.cs
+            url: '/file/connector', // connector route defined in \App_Start\RouteConfig.cs
             customData: { folder: '@Model.Folder', subFolder: '@Model.SubFolder' }, // customData passed in every request to the connector as query strings. These values are used in FileController's Index method.
             rememberLastDir: false, // Prevent elFinder saving in the Browser LocalStorage the last visited directory
             commands: myCommands,
@@ -70,7 +70,7 @@
         $('#elfinder-selectFile').click(function ()
         {
             if (selectedFile != null)
-                $.post('file/selectFile', { target: selectedFile }, function (response)
+                $.post('file/select-file', { target: selectedFile }, function (response)
                 {
                     alert(response);
                 });

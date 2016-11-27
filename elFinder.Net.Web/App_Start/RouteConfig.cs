@@ -9,14 +9,17 @@ namespace elFinder.Net.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            // elFinder's connector route
-            routes.MapRoute(null, "connector", new { controller = MVC.File.Name, action = MVC.File.ActionNames.Index });
+            routes.MapMvcAttributeRoutes();
+            routes.LowercaseUrls = true;
 
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = MVC.Home.Name, action = MVC.Home.ActionNames.Index, id = UrlParameter.Optional }
-            );
+            //// elFinder's connector route
+            //routes.MapRoute(null, "connector", new { controller = MVC.File.Name, action = MVC.File.ActionNames.Index });
+
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { controller = MVC.Home.Name, action = MVC.Home.ActionNames.Index, id = UrlParameter.Optional }
+            //);
         }
     }
 }

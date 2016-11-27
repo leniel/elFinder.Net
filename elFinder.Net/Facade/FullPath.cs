@@ -1,5 +1,5 @@
-﻿using System.IO;
-using System;
+﻿using System;
+using System.IO;
 
 namespace ElFinder
 {
@@ -9,10 +9,12 @@ namespace ElFinder
         {
             get { return _root; }
         }
+
         public bool IsDirectoty
         {
             get { return _isDirectory; }
         }
+
         public string RelativePath
         {
             get
@@ -20,6 +22,7 @@ namespace ElFinder
                 return _relativePath;
             }
         }
+
         public DirectoryInfo Directory
         {
             get
@@ -27,6 +30,7 @@ namespace ElFinder
                 return _isDirectory ? (DirectoryInfo)_fileSystemObject : null;
             }
         }
+
         public FileInfo File
         {
             get
@@ -34,6 +38,7 @@ namespace ElFinder
                 return !_isDirectory ? (FileInfo)_fileSystemObject : null;
             }
         }
+
         public FullPath(Root root, FileSystemInfo fileSystemObject)
         {
             if (root == null)
@@ -56,17 +61,11 @@ namespace ElFinder
             }
             else
                 throw new InvalidOperationException("Filesystem object must be in it root directory or in root subdirectory");
-
         }
-
 
         private Root _root;
         private FileSystemInfo _fileSystemObject;
         private bool _isDirectory;
         private string _relativePath;
-
-        
-        
-
     }
 }

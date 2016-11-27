@@ -17,6 +17,6 @@ namespace ElFinder.Response
         {
             Added = new List<DTOBase>();
             Removed = new List<string>();
-        }     
+        }
     }
 }

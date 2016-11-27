@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 using System.Web;
 
 namespace ElFinder
@@ -18,7 +15,7 @@ namespace ElFinder
             {
                 modifyDate = DateTime.UtcNow;
             }
-            string eTag = GetFileETag(filename, updated);            
+            string eTag = GetFileETag(filename, updated);
             if (!IsFileModified(updated, eTag, request))
             {
                 response.StatusCode = (int)System.Net.HttpStatusCode.NotModified;
@@ -49,7 +46,7 @@ namespace ElFinder
             DateTime modifiedSince;
             bool fileDateModified = true;
 
-            //Check If-Modified-Since request header, if it exists 
+            //Check If-Modified-Since request header, if it exists
             if (!string.IsNullOrEmpty(request.Headers["If-Modified-Since"]) && DateTime.TryParse(request.Headers["If-Modified-Since"], out modifiedSince))
             {
                 fileDateModified = false;
@@ -61,7 +58,7 @@ namespace ElFinder
                 }
             }
 
-            //check the If-None-Match header, if it exists, this header is used by FireFox to validate entities based on the etag response header 
+            //check the If-None-Match header, if it exists, this header is used by FireFox to validate entities based on the etag response header
             bool eTagChanged = false;
             if (!string.IsNullOrEmpty(request.Headers["If-None-Match"]))
             {
@@ -69,7 +66,5 @@ namespace ElFinder
             }
             return (eTagChanged || fileDateModified);
         }
-
-       
     }
 }

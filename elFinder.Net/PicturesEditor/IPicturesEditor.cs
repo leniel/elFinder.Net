@@ -18,7 +18,7 @@ namespace ElFinder
         /// </summary>
         /// <param name="fileExtension">The extension of file</param>
         /// <returns><c>True</c> if can process. otherwise <c>false</c></returns>
-        bool CanProcessFile(string fileExtension);        
+        bool CanProcessFile(string fileExtension);
 
         /// <summary>
         /// Generate thumbnail of image

@@ -17,10 +17,12 @@ namespace ElFinder.Response
         {
             _added = new List<DTOBase>() { DTOBase.Create(newFile, root) };
         }
+
         public AddResponse(DirectoryInfo newDir, Root root)
         {
             _added = new List<DTOBase>() { DTOBase.Create(newDir, root) };
         }
+
         public AddResponse()
         {
             _added = new List<DTOBase>();

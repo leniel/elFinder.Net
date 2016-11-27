@@ -1,14 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "elFinder.Net.Web", "elFinder.Net.Web\elFinder.Net.Web.csproj", "{9D7082E3-3A25-4158-9B28-ABFDE5440DD7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1DB83FCF-770D-47A7-974F-DDCEEB4A6510}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "elFinder.Net", "elFinder.Net\elFinder.Net.csproj", "{EE8DA138-7EDA-4EB5-B3FD-377763D5EAAE}"
 EndProject

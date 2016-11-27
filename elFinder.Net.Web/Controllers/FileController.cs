@@ -1,12 +1,15 @@
-﻿using ElFinder;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Web.Mvc;
-using System.Collections.Generic;
+using ElFinder;
 
 namespace elFinder.Net.Web.Controllers
 {
+    [RouteArea("")]
+    [RoutePrefix("file")]
     public partial class FileController : Controller
     {
+        [Route("connector")]
         public virtual ActionResult Index(string folder, string subFolder)
         {
             FileSystemDriver driver = new FileSystemDriver();
@@ -23,7 +26,7 @@ namespace elFinder.Net.Web.Controllers
                 IsReadOnly = false, // Can be readonly according to user's membership permission
                 Alias = "Files", // Beautiful name given to the root/home folder
                 MaxUploadSizeInKb = 500, // Limit imposed to user uploaded file <= 500 KB
-                LockedFolders = new List<string>( new string[] { "Folder1"})
+                LockedFolders = new List<string>(new string[] { "Folder1" })
             };
 
             // Was a subfolder selected in Home Index page?
@@ -39,6 +42,7 @@ namespace elFinder.Net.Web.Controllers
             return connector.Process(this.HttpContext.Request);
         }
 
+        [Route("select-file")]
         public virtual ActionResult SelectFile(string target)
         {
             FileSystemDriver driver = new FileSystemDriver();
@@ -52,6 +56,5 @@ namespace elFinder.Net.Web.Controllers
 
             return Json(connector.GetFileByHash(target).FullName);
         }
-
     }
 }
